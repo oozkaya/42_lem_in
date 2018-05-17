@@ -6,26 +6,36 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/16 17:55:22 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/17 18:35:19 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_room	*ft_room_initialize(void)
+void	ft_room_initialize(t_room **room)
 {
-	t_room	*room;
-
-	if ((room = malloc(sizeof(*room))))
-		return (NULL);
-	if ((room->name = malloc(sizeof())))
+	if (!(*room = malloc(sizeof(t_room))))
+		return ;
+	(*room)->name = NULL;
+	(*room)->type = NORMAL;
+	(*room)->x = 0;
+	(*room)->y = 0;
+	(*room)->next = NULL;
 }
 
-t_map	*ft_map_initialize(void)
+void	ft_map_initialize(t_map *map)
 {
-	t_map	*map;
+//	t_map	*map;
 
-	if (!(map = malloc(sizeof(*map))))
-		return (NULL);
-	
+//	if (!(map = malloc(sizeof(t_map))))
+//		return (NULL);
+	map->ants = -1;
+	ft_room_initialize(&map->room);
+	//ft_room_initialize(&map->room);
+	//ft_printf("inside map %d\n", map->room->x);
+//	if ((map->link = malloc(sizeof(*link))))
+//		return (NULL);
+//	map->link->room1 = NULL;
+//	map->link->room2 = NULL;*/
+//	return (map);
 }

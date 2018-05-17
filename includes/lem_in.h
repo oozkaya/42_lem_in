@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:48 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/16 19:44:50 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/17 18:34:44 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_room
 	int				x;
 	int				y;
 	int				type;
-	struct s_elem	*next;
+	struct s_room	*next;
 }				t_room;
 
 typedef struct	s_link
@@ -37,6 +37,11 @@ typedef struct	s_map
 	t_room	*room;
 	t_link	*link;
 }				t_map;
+
+
+int				ft_parser(t_map *map, char *line);
+void			ft_map_initialize(t_map *map);
+void			ft_room_initialize(t_room **room);
 
 enum { NORMAL, START, END };
 
