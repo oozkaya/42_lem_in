@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/17 18:35:19 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/18 16:09:42 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	ft_room_initialize(t_room **room)
 	if (!(*room = malloc(sizeof(t_room))))
 		return ;
 	(*room)->name = NULL;
-	(*room)->type = NORMAL;
 	(*room)->x = 0;
 	(*room)->y = 0;
+	(*room)->type = NORMAL;
+	//(*room)->link = NULL;
+	(*room)->index = 0;
+	(*room)->prev = NULL;
 	(*room)->next = NULL;
 }
 
