@@ -20,8 +20,10 @@ int		main(void)
 
 	ft_map_initialize(&map);
 	head = map.room;
+//	ft_putstr("OK1\n");
 	while (get_next_line(0, &line) > 0)
 	{
+//		ft_putstr("OK2\n");
 		if (ft_parser(&map, head, line) == -1)
 		{
 			ft_putstr("Error ft_parser\n");

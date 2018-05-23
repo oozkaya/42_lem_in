@@ -34,6 +34,7 @@ void	ft_map_initialize(t_map *map)
 //		return (NULL);
 	map->ants = -1;
 	ft_room_initialize(&map->room);
+	map->links = NULL;
 	//ft_room_initialize(&map->room);
 	//ft_printf("inside map %d\n", map->room->x);
 //	if ((map->link = malloc(sizeof(*link))))
