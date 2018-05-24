@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/05/17 18:00:47 by oozkaya          ###   ########.fr        #
+#    Updated: 2018/05/24 19:01:44 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,11 @@ LDLIBS = -lft
 # Sources
 SRC_NAME =	\
 			main.c\
+			buffer.c\
 			map_init.c\
-			parser.c
+			parser.c\
+			parser_tools.c\
+			solver.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
