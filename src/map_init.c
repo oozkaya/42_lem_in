@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/24 19:01:29 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/30 13:45:07 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	ft_room_initialize(t_room **room)
 	(*room)->next = NULL;
 }
 
+void	ft_path_initialize(t_path **path, int room_qty)
+{
+	if (!(*path = (t_path*)malloc(sizeof(t_path))))
+		return ;
+	if (!((*path)->tab = (int*)malloc(sizeof(int) * room_qty)))
+		return ;
+	ft_memset((*path)->tab, -1, sizeof(int) * room_qty);
+	(*path)->next = NULL;
+}
+
 void	ft_link_iniatilize(t_map *map, t_room *head)
 {
 	int		i;
@@ -53,34 +63,5 @@ void	ft_link_iniatilize(t_map *map, t_room *head)
 			return ;
 		ft_bzero(map->links[i], sizeof(int) * map->room_qty);
 	}
-	if (!(map->path = (int*)malloc(sizeof(int) * map->room_qty)))
-		return ;
-	ft_memset(map->path, -1, sizeof(int) * map->room_qty);
-}
-
-void	ft_free_map(t_map *map)
-{
-	int		i;
-
-	ft_memdel((void**)&map->room);
-	if (map->links)
-	{
-		i = -1;
-		while (++i < map->room_qty)
-			ft_memdel((void**)&map->links[i]);
-		ft_memdel((void**)&map->links);
-	}
-	ft_memdel((void**)&map->buf->str);
-	ft_memdel((void**)&map->buf);
-	ft_memdel((void**)&map->path);
-}
-
-void	ft_free_tab(char **tab)
-{
-	int		i;
-
-	i = 0;
-	while (tab[i])
-		ft_memdel((void**)&tab[i++]);
-	ft_memdel((void**)&tab);
+	ft_path_initialize(&map->path, map->room_qty);
 }

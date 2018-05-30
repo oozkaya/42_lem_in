@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:28:46 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/24 15:29:51 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/30 19:00:04 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int		ft_check_room_apply(t_room **room, char *line)
 
 	ret = 1;
 	tab = ft_strsplit(line, ' ');
-	if (tab[3] || !ft_str_isdigit(tab[1]) || !ft_str_isdigit(tab[2]))
+	if (tab[3] || !tab[0] || !tab[1] || !tab[2])
+	{
+		ft_free_tab(tab);
+		return (-1);
+	}
+	if (!ft_str_isdigit(tab[1]) || !ft_str_isdigit(tab[2]))
 		ret = -1;
 	if (ft_strchr(tab[0], '-') || tab[0][0] == 'L' || tab[0][0] == '#')
 		ret = -1;
@@ -54,7 +59,7 @@ void	ft_check_start_end(t_room *head, t_map *map)
 	}
 	if (!start || !end)
 	{
-		ft_free_map(map);
+		ft_free_map(map, head);
 		ft_putstr_fd("ERROR\n", 2);
 		exit(EXIT_FAILURE);
 	}
@@ -81,6 +86,8 @@ int		ft_name_is_valid(t_room *head, char **links)
 	int		found1;
 	int		found2;
 
+	if (!links[0] || !links[1] || !links)
+		return (0);
 	found1 = 0;
 	found2 = 0;
 	tmp = head;
@@ -93,7 +100,7 @@ int		ft_name_is_valid(t_room *head, char **links)
 		tmp = tmp->next;
 	}
 	if (!found1 || !found2)
-		return (-1);
+		return (0);
 	return (1);
 }
 

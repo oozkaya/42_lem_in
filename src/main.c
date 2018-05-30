@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:05 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/24 19:22:41 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/30 20:18:04 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,46 @@ int		main(void)
 	}
 	ft_memdel((void**)&line);
 	map.room = head;
-	ft_solver(&map, head);
-	write(1, map.buf->str, ft_strlen(map.buf->str));
-	//while (++i < map.room_qty)	
-	int i = -1;
-	while (map.path[++i] != -1)
-		ft_printf("[%d]-", map.path[i]);
-	ft_putstr("\n");
-/*	while (head)
+	//while (++i < map.room_qty)
+	t_room *tmp = head;
+	while (tmp)
 	{
-		ft_printf("name = \"%s\"\nx = %d\ny = %d\ntype = %d\nindex = %d\n\n", head->name, head->x, head->y, head->type, head->index);
-		head = head->next;
+		ft_printf("name = \"%s\"\nx = %d\ny = %d\ntype = %d\nindex = %d\n\n", tmp->name, tmp->x, tmp->y, tmp->type, tmp->index);
+		tmp = tmp->next;
 	}
-	int i = 0;
+	int i = -1;
 	int j = 0;
-	ft_putstr("\t0  1  2  3  4  5  6  7\n");
-	ft_putstr("\t|  |  |  |  |  |  |  |\n");
-	while (i < 8)
+	ft_putstr("\t");
+	while (++i < map.room_qty)
+		ft_printf("%d  ", i);
+	ft_putstr("\n\t");
+	i = 0;
+	while (i++ < map.room_qty)
+		ft_printf("|  ");
+	ft_putstr("\n");
+	i = 0;
+	while (i < map.room_qty)
 	{
 		j = 0;
 		ft_printf("[%d] --\t", i);
-		while (j < 8)
+		while (j < map.room_qty)
 		{
 			ft_printf("%d  ", map.links[i][j]);
 			j++;
 		}
 		ft_putstr("\n");
 		i++;
-	}*/
+	}
+	ft_solver(&map);
+	ft_print_solution(&map, head);
+	ft_printf("room_qty = %d\n", map.room_qty);
+	tmp = head;
+	while (tmp)
+	{
+		ft_printf("tmp->name = %s\n", tmp->name);
+		tmp = tmp->next;
+	}
+	ft_free_map(&map, head);
+//	while (1);
 	return (0);
 }

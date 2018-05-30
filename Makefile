@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/05/24 19:01:44 by oozkaya          ###   ########.fr        #
+#    Updated: 2018/05/30 11:48:38 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,11 @@ SRC_NAME =	\
 			main.c\
 			buffer.c\
 			map_init.c\
+			map_free.c\
 			parser.c\
 			parser_tools.c\
-			solver.c
+			solver.c\
+			print_solution.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

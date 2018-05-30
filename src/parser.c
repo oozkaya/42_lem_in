@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 14:10:34 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/24 15:30:06 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/05/30 19:52:50 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_parse_link(t_room *head, char *line, t_map *map, int *started)
 	{
 		if (!head->name)
 		{
-			ft_free_map(map);
+			ft_free_map(map, head);
 			ft_putstr_fd("ERROR\n", 2);
 			exit(EXIT_FAILURE);
 		}
@@ -59,12 +59,13 @@ static int	ft_parse_link(t_room *head, char *line, t_map *map, int *started)
 		ft_update_index(head);
 	}
 	links = ft_strsplit(line, '-');
-	if (ft_name_is_valid(head, links) == -1 || !ft_strchr(line, '-'))
+	if (!ft_name_is_valid(head, links) || !ft_strchr(line, '-') || links[2])
 	{
 		ft_free_tab(links);
 		return (-1);
 	}
-	map->links[ft_index(head, links[0])][ft_index(head, links[1])] = 1;
+	map->links[ft_index(head, links[0])][ft_index(head, links[1])] = LINKED;
+	map->links[ft_index(head, links[1])][ft_index(head, links[0])] = LINKED;
 	ft_free_tab(links);
 	*started = 1;
 	return (1);
@@ -74,24 +75,24 @@ int			ft_parser(t_map *map, t_room *head, char *line)
 {
 	static int	started;
 
-	if (map->ants == -1)
+	if (line[0] == '#' && line[1] == '#' && line[2] != 's' && line[2] != 'e')
+		return (1);
+	else if (line[0] == '#' && line[1] != '#')
+		return (1);
+	else if (map->ants == -1)
 	{
 		if (!ft_str_isdigit(line) || ft_atoi(line) < 0)
 		{
-			ft_free_map(map);
+			ft_free_map(map, head);
 			ft_putstr_fd("ERROR\n", 2);
 			exit(EXIT_FAILURE);
 		}
 		map->ants = ft_atoi(line);
 		return (1);
 	}
-	if (line[0] == '#' && line[1] == '#' && line[2] != 's' && line[2] != 'e')
-		return (1);
-	else if (line[0] == '#' && line[1] != '#')
-		return (1);
 	else if (!ft_strchr(line, '-') && !started)
 		return (ft_parse_room(&map->room, head, line));
-	else
+	else if (ft_strchr(line, '-'))
 		return (ft_parse_link(head, line, map, &started));
-	return (1);
+	return (-1);
 }
