@@ -6,13 +6,13 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:46:15 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/30 18:31:23 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/20 15:16:34 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static char	*ft_name(t_map *map, int index)
+char		*ft_name(t_map *map, int index)
 {
 	t_room	*tmp;
 
@@ -28,7 +28,7 @@ static char	*ft_name(t_map *map, int index)
 
 static int	ft_type(t_map *map, char *name)
 {
-	t_room *tmp;
+	t_room	*tmp;
 
 	tmp = map->room;
 	while (tmp->name)
@@ -39,30 +39,6 @@ static int	ft_type(t_map *map, char *name)
 	}
 	return (0);
 }
-
-/*static int	ft_recursive2(t_map *map, t_room *head, char *name, int path_index, t_path *path)
-{
-	int		i;
-
-	if (ft_type(head, name) == END)
-		return (1);
-	if (path_index == map->room_qty)
-		return (0);
-	i = -1;
-	while (++i < map->room_qty)
-	{
-		if (map->links[ft_index(head, name)][i] == 1)
-		{
-			path->tab[path_index] = i;
-			map->links[ft_index(head, name)][i] = 2;
-			if (ft_recursive2(map, head, ft_name(head, i), path_index + 1, path))
-				return (1);
-			map->links[ft_index(head, name)][i] = 1;
-		}
-	}
-	path->tab[path_index] = -1;
-	return (0);
-}*/
 
 static void	ft_copy_path(t_path *src, t_path *dest)
 {
@@ -84,6 +60,7 @@ static int	ft_recursive_condition(t_map *map, char *name, int path_index)
 		ft_path_initialize(&map->path->next, map->room_qty);
 		if (path_index != map->room_qty)
 			ft_copy_path(map->path, map->path->next);
+		map->path->size = path_index + 1;
 		map->path = map->path->next;
 		return (1);
 	}
@@ -103,7 +80,8 @@ static void	ft_recursive(t_map *map, char *name, int path_index)
 	index = ft_index(map->room, name);
 	while (++i < map->room_qty)
 	{
-		if (map->links[index][i] == LINKED)
+		if (map->links[index][i] == LINKED
+			&& ft_index_type(map->room, i) != START)
 		{
 			map->path->tab[path_index] = i;
 			map->links[index][i] = USED;
@@ -116,7 +94,7 @@ static void	ft_recursive(t_map *map, char *name, int path_index)
 	map->path->tab[path_index] = -1;
 }
 
-void	ft_solver(t_map *map)
+void		ft_solver(t_map *map)
 {
 	t_room	*tmp;
 	t_path	*head;
@@ -134,12 +112,7 @@ void	ft_solver(t_map *map)
 		}
 		tmp = tmp->next;
 	}
-/*	while (ft_recursive(map, head, tmp->name, 1, curr))
-	{
-		ft_path_initialize(&curr->next, map->room_qty);
-		curr = curr->next;
-		curr->tab[0] = map->path->tab[0];
-	}*/
 	ft_recursive(map, tmp->name, 1);
 	map->path = head;
+	ft_valid_paths(map);
 }

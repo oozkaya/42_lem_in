@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/05/30 11:48:38 by oozkaya          ###   ########.fr        #
+#    Updated: 2018/06/19 10:53:07 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ SRC_NAME =	\
 			map_free.c\
 			parser.c\
 			parser_tools.c\
+			parser_tools2.c\
 			solver.c\
+			valid_paths.c\
+			sort_paths.c\
 			print_solution.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

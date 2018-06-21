@@ -6,24 +6,11 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 14:10:34 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/30 19:52:50 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/07 17:51:43 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static void	ft_update_type(t_room *head, int type)
-{
-	t_room	*tmp;
-
-	tmp = head;
-	while (tmp->name)
-	{
-		if (tmp->type == type)
-			tmp->type = NORMAL;
-		tmp = tmp->next;
-	}
-}
 
 static int	ft_parse_room(t_room **room, t_room *head, char *line)
 {
@@ -64,8 +51,7 @@ static int	ft_parse_link(t_room *head, char *line, t_map *map, int *started)
 		ft_free_tab(links);
 		return (-1);
 	}
-	map->links[ft_index(head, links[0])][ft_index(head, links[1])] = LINKED;
-	map->links[ft_index(head, links[1])][ft_index(head, links[0])] = LINKED;
+	ft_apply_link(map, head, links);
 	ft_free_tab(links);
 	*started = 1;
 	return (1);

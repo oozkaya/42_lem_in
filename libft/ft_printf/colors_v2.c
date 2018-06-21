@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:35:37 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/03/20 10:35:40 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/20 11:15:00 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ static int	ft_count_color(va_list ap, char **tab, char *format)
 		if (color[1] == 's')
 		{
 			arg = va_arg(aq, char*);
-			i = 0;
-			while (tab[i])
-			{
+			i = -1;
+			while (tab[++i])
 				if (ft_strequ(arg, tab[i]))
 					counter++;
-				i++;
-			}
 		}
+		else
+			arg = va_arg(aq, char*);
 		format = color + 2;
 	}
 	va_end(aq);

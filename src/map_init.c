@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/30 13:45:07 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/20 14:27:51 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_map_initialize(t_map *map)
 	map->room_qty = 0;
 	map->links = NULL;
 	init_buffer(&map->buf);
+	map->ants_arrived = 0;
 }
 
 void	ft_room_initialize(t_room **room)
@@ -30,6 +31,7 @@ void	ft_room_initialize(t_room **room)
 	(*room)->y = 0;
 	(*room)->type = NORMAL;
 	(*room)->index = 0;
+	(*room)->ant_id = 0;
 	(*room)->next = NULL;
 }
 
@@ -40,6 +42,8 @@ void	ft_path_initialize(t_path **path, int room_qty)
 	if (!((*path)->tab = (int*)malloc(sizeof(int) * room_qty)))
 		return ;
 	ft_memset((*path)->tab, -1, sizeof(int) * room_qty);
+	(*path)->index = 0;
+	(*path)->size = 0;
 	(*path)->next = NULL;
 }
 

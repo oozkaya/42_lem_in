@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:05 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/30 20:18:04 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/07 18:54:23 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		main(void)
 	ft_memdel((void**)&line);
 	map.room = head;
 	//while (++i < map.room_qty)
-	t_room *tmp = head;
+	t_room *tmp;
+	tmp = head;
 	while (tmp)
 	{
 		ft_printf("name = \"%s\"\nx = %d\ny = %d\ntype = %d\nindex = %d\n\n", tmp->name, tmp->x, tmp->y, tmp->type, tmp->index);
@@ -61,14 +62,15 @@ int		main(void)
 		i++;
 	}
 	ft_solver(&map);
+//	ft_sort_paths(&map);
 	ft_print_solution(&map, head);
-	ft_printf("room_qty = %d\n", map.room_qty);
+/*	ft_printf("room_qty = %d\n", map.room_qty);
 	tmp = head;
 	while (tmp)
 	{
 		ft_printf("tmp->name = %s\n", tmp->name);
 		tmp = tmp->next;
-	}
+	}*/
 	ft_free_map(&map, head);
 //	while (1);
 	return (0);
