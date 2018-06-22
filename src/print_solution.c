@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 14:39:58 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/22 15:29:48 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 19:41:07 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,6 +339,7 @@ void	ft_print_solution(t_map *map, t_room *head)
 	tmp = map->path;
 	if (!map->room_qty || tmp->tab[1] == -1)
 	{
+		ft_printf("map->room_qty = %d et tmp->tab[1] = %d\n", map->room_qty, tmp->tab[1]);
 		ft_putstr_fd("Invalid map\n", 2);
 		ft_free_map(map, head);
 		exit(EXIT_FAILURE);

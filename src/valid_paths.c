@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 13:24:14 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/22 15:31:01 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 20:36:30 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ static int	ft_is_valid(int *to_check, int *tmp)
 	int		i;
 	int		j;
 
+/*	i = -1;
+	ft_printf("to_check = ");
+	while (++i < 8)
+		ft_printf("[%d]-", to_check[i]);
+	ft_putchar('\n');
+	i = -1;
+	ft_printf("tmp = ");
+	while (++i < 8)
+		ft_printf("[%d]-", tmp[i]);
+	ft_putchar('\n');*/
 	i = 1;
 	while (to_check[i + 1] != -1)
 	{
@@ -66,18 +76,19 @@ void		ft_valid_paths(t_map *map)
 	t_path	*to_check;
 	int		deleted;
 
+	ft_sort_paths(map, 1);
 	tmp = map->path;
-/*	while (tmp)
+	while (tmp)
 	{
 		int i = -1;
 //		ft_printf("tab num %d : ", ++j);
 		ft_printf("tab num %d : ", tmp->index);
-		while (tmp->tab[++i] && i < map->room_qty)
+		//while (++i < map->room_qty)
+		while (tmp->tab[++i] != -1 && i < map->room_qty)
 			ft_printf("[%d]-", tmp->tab[i]);
 		ft_putstr("\n");
 		tmp = tmp->next;
-	}*/
-	ft_sort_paths(map, 1);
+	}
 	to_check = map->path;
 	while (to_check)
 	{
