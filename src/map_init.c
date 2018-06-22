@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/20 14:27:51 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 11:39:50 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_room_initialize(t_room **room)
 	(*room)->type = NORMAL;
 	(*room)->index = 0;
 	(*room)->ant_id = 0;
+	(*room)->done = 0;
 	(*room)->next = NULL;
 }
 

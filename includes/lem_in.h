@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:48 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/20 15:01:22 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 11:11:11 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_room
 	int				type;
 	int				index;
 	int				ant_id;
+	int				done;
 	struct s_room	*next;
 }				t_room;
 

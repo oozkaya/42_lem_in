@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 13:24:14 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/20 15:20:00 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 15:31:01 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ void		ft_valid_paths(t_map *map)
 	t_path	*to_check;
 	int		deleted;
 
+	tmp = map->path;
+/*	while (tmp)
+	{
+		int i = -1;
+//		ft_printf("tab num %d : ", ++j);
+		ft_printf("tab num %d : ", tmp->index);
+		while (tmp->tab[++i] && i < map->room_qty)
+			ft_printf("[%d]-", tmp->tab[i]);
+		ft_putstr("\n");
+		tmp = tmp->next;
+	}*/
 	ft_sort_paths(map, 1);
 	to_check = map->path;
 	while (to_check)

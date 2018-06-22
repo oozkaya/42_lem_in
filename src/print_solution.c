@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 14:39:58 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/20 20:30:25 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/22 15:29:48 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,16 +196,21 @@ static t_room	*ft_get_next_room(t_map *map, int id)
 	t_path	*path;
 	int		index_to_find;
 	int		i;
+	//int		done;
 
 	room = map->room;
 	while (room)
 	{
 		if (room->ant_id == id)
+		{
+			////ft_printf("first id = %d\n", id);
 			break ;
+		}
 		room = room->next;
 	}
 	path = map->path;
-	while (path)
+	//done = 0;
+	while (path) //&& !done)
 	{
 		i = -1;
 		while (++i <= path->size)
@@ -213,20 +218,23 @@ static t_room	*ft_get_next_room(t_map *map, int id)
 			if (path->tab[i] == room->index)
 			{
 				//if (!path->tab[i + 1] || path->tab[i + 1] == -1)
-				ft_printf("id = %d et path->tab[i] = %d et path->tab[i + 1] = %d\n", id, path->tab[i], path->tab[i + 1]);
+				////ft_printf("id = %d et index = %d et path->tab[i] = %d et path->tab[i + 1] = %d\n", id, room->index, path->tab[i], path->tab[i + 1]);
 				if (ft_type(map, path->tab[i + 1]) == END)
 				{
-					ft_printf("done for id = %d\n", id);
+					///ft_printf("done for id = %d\n", id);
 					ft_printf("L%d-%s ", id, ft_name(map, path->tab[i + 1]));
+					room->ant_id = 0;
 					map->ants_arrived++;
 					return (NULL);
 				}
 				index_to_find = path->tab[i + 1];
+				//done = 1;
 				break ;
 			}
 		}
 		path = path->next;
 	}
+	////ft_printf("next_room->index = %d\n", index_to_find);
 	room = map->room;
 	while (room)
 	{
@@ -241,17 +249,40 @@ static void	ft_move_all(t_map *map)
 {
 	t_room	*room;
 	t_room	*next_room;
+	int		id;
 
+	///ft_printf("ACCESS TO FT_MVOE_ALL\n");
+	id = 0;
+	while (++id <= map->ants)
+	{
 	room = map->room;
 	while (room)
 	{
-		//if (room->ant_id && room->ant_id != map->ants + 1
-		if (room->ant_id && (next_room = ft_get_next_room(map, room->ant_id)))
+		if (room->ant_id == id)
 		{
-			ft_printf("room->index = %d\n", room->index);
+		//if (room->ant_id && room->ant_id != map->ants + 1
+		////ft_printf("room->id = %d et room->done = %d\n", room->ant_id, room->done);
+		////ft_printf("room->index = %d\n", room->index);
+		if (room->ant_id && !room->done
+				&& (next_room = ft_get_next_room(map, room->ant_id)))
+		{
+			///ft_printf("room->index = %d\n", room->index);
 			next_room->ant_id = room->ant_id;
+			//ft_printf("next_room->ant_id = %d et room->ant_id = %d\n", next_room->ant_id, room->ant_id);
+			//ft_printf("next_room->index = %d et room->index = %d\n", next_room->index, room->index);
+			next_room->done = 1;
+			room->done = 1;
 			room->ant_id = 0;
 		}
+		break ;
+		}
+		room = room->next;
+	}
+	}
+	room = map->room;
+	while (room)
+	{
+		room->done = 0;
 		room = room->next;
 	}
 }
@@ -272,7 +303,7 @@ static void	ft_print_all(t_map *map)
 			room = room->next;
 		}
 	}
-	ft_putstr("\n");
+	ft_putchar('\n');
 }
 
 static void	ft_output(t_map	*map)
@@ -289,7 +320,15 @@ static void	ft_output(t_map	*map)
 	}*/
 		ft_print_all(map);
 		ft_move_all(map);
+/*	t_room *tmp;
+	tmp = map->room;
+	while (tmp)
+	{
+		ft_printf("name = \"%s\"\nant_id = %d\nindex = %d\n\n", tmp->name, tmp->ant_id, tmp->index);
+		tmp = tmp->next;
+	}*/
 	}
+	ft_putchar('\n');
 }
 
 void	ft_print_solution(t_map *map, t_room *head)
