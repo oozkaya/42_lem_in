@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:20:43 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/03/20 10:37:40 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/25 20:22:13 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@
 # define BLUE "\033[34m"
 # define MAGENTA "\033[35m"
 # define CYAN "\033[36m"
-# define GRAY "\033[37m"
+# define GRAY "\033[90m"
+# define LGRAY "\033[37m"
+# define LRED "\033[91m"
+# define LGREEN "\033[92m"
+# define LYELLOW "\033[93m"
+# define LBLUE "\033[94m"
+# define LMAGENTA "\033[95m"
+# define LCYAN "\033[96m"
 
 # define COLOR_LEN 5
 

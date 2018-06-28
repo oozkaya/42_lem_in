@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 14:10:34 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/07 17:51:43 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/28 15:05:23 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_parse_link(t_room *head, char *line, t_map *map, int *started)
 
 	if (!*started)
 	{
-		if (!head->name)
+		if (!head->name || !ft_start_end(head))
 		{
 			ft_free_map(map, head);
 			ft_putstr_fd("ERROR\n", 2);

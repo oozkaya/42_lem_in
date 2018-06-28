@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:16:11 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/22 11:39:50 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/28 16:09:12 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	ft_map_initialize(t_map *map)
 	map->ants = -1;
 	ft_room_initialize(&map->room);
 	map->room_qty = 0;
+	map->link_qty = 0;
 	map->links = NULL;
 	init_buffer(&map->buf);
 	map->ants_arrived = 0;
+	map->laps = 0;
 }
 
 void	ft_room_initialize(t_room **room)

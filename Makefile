@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/06/19 10:53:07 by oozkaya          ###   ########.fr        #
+#    Updated: 2018/06/27 19:37:39 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,11 @@ SRC_NAME =	\
 			solver.c\
 			valid_paths.c\
 			sort_paths.c\
-			print_solution.c
+			print_solution.c\
+			move_all.c\
+			graph.c\
+			bonus.c\
+			map_info.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

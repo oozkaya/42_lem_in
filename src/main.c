@@ -6,18 +6,61 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:05 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/07 18:54:23 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/28 20:22:53 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		main(void)
+static void	ft_detailed_room_info(t_map *map)
+{
+	t_room	*tmp;
+	int		type;
+	char	*color;
+
+	tmp = map->room;
+	while (tmp->name)
+	{
+		type = ft_index_type(map->room, tmp->index);
+		if (type == START || type == END)
+			color = LRED;
+		else
+			color = LCYAN;
+		ft_printf("%sname =%s \"%s\"\n%sx =%s %d\n%sy =%s %d\n"
+					"%stype =%s %d\n%sindex =%s %d\n\n",
+					color, EOC, tmp->name, color, EOC, tmp->x,
+					color, EOC, tmp->y, color, EOC, tmp->type,
+					color, EOC, tmp->index);
+		tmp = tmp->next;
+	}
+	ft_printf("%s<==========================>%s\n\n", LRED, EOC);
+}
+
+static void	ft_solve_print(t_map *map, int flags)
+{
+	if (flags & FLAG_I)
+		ft_map_info(map);
+	ft_solver(map, flags);
+	if (flags & FLAG_I)
+		ft_paths_info(map, 2);
+	if (flags & FLAG_R)
+		ft_detailed_room_info(map);
+	ft_print_solution(map);
+	if (flags & FLAG_L)
+		ft_printf("\n%sTotals laps =%s %d\n", LCYAN, EOC, map->laps);
+	if (flags & FLAG_G)
+		ft_graph(map);
+}
+
+int			main(int ac, char **av)
 {
 	char	*line;
+	int		flags;
 	t_map	map;
 	t_room	*head;
 
+	flags = NO_FLAG;
+	ft_flag_checker(ac, av, &flags);
 	ft_map_initialize(&map);
 	head = map.room;
 	while (get_next_line(0, &line) > 0)
@@ -30,48 +73,7 @@ int		main(void)
 	}
 	ft_memdel((void**)&line);
 	map.room = head;
-	//while (++i < map.room_qty)
-	t_room *tmp;
-	tmp = head;
-	while (tmp)
-	{
-		ft_printf("name = \"%s\"\nx = %d\ny = %d\ntype = %d\nindex = %d\n\n", tmp->name, tmp->x, tmp->y, tmp->type, tmp->index);
-		tmp = tmp->next;
-	}
-	int i = -1;
-	int j = 0;
-	ft_putstr("\t");
-	while (++i < map.room_qty)
-		ft_printf("%d  ", i);
-	ft_putstr("\n\t");
-	i = 0;
-	while (i++ < map.room_qty)
-		ft_printf("|  ");
-	ft_putstr("\n");
-	i = 0;
-	while (i < map.room_qty)
-	{
-		j = 0;
-		ft_printf("[%d] --\t", i);
-		while (j < map.room_qty)
-		{
-			ft_printf("%d  ", map.links[i][j]);
-			j++;
-		}
-		ft_putstr("\n");
-		i++;
-	}
-	ft_solver(&map);
-//	ft_sort_paths(&map);
-	ft_print_solution(&map, head);
-/*	ft_printf("room_qty = %d\n", map.room_qty);
-	tmp = head;
-	while (tmp)
-	{
-		ft_printf("tmp->name = %s\n", tmp->name);
-		tmp = tmp->next;
-	}*/
+	ft_solve_print(&map, flags);
 	ft_free_map(&map, head);
-//	while (1);
 	return (0);
 }

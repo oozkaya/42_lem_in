@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:48 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/22 11:11:11 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/28 16:16:28 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 # define LEM_IN_H
 
 # include "libft.h"
+# include <fcntl.h>
+
+# define NO_FLAG 0
+# define FLAG_I 1
+# define FLAG_L 2
+# define FLAG_R 4
+# define FLAG_G 8
+
 
 enum { NORMAL, START, END };
-enum { UNLINKED, LINKED, USED};
-
+enum { UNLINKED, LINKED, USED };
 
 typedef struct	s_path
 {
@@ -60,11 +67,12 @@ typedef struct	s_map
 	int		ants;
 	t_room	*room;
 	int		room_qty;
+	int		link_qty;
 	int		**links;
 	t_buff	*buf;
 	t_path	*path;
-//	t_ants	*ants_path;
 	int		ants_arrived;
+	int		laps;
 }				t_map;
 
 /*
@@ -95,22 +103,30 @@ void			ft_update_index(t_room *head);
 int				ft_name_is_valid(t_room *head, char **links);
 int				ft_index(t_room *head, char *link);
 
+char			*ft_name(t_map *map, int index);
 void			ft_update_type(t_room *head, int type);
 int				ft_index_type(t_room *head, int index);
 void			ft_apply_link(t_map *map, t_room *head, char **links);
+int				ft_start_end(t_room *head);
 
 /*
 ** Solver
 */
-char				*ft_name(t_map *map, int index);
-void				ft_solver(t_map *map);
+void			ft_solver(t_map *map, int flags);
+void			ft_valid_paths(t_map *map);
+void			ft_delete_path(t_map *map, t_path **to_delete);
+void			ft_sort_paths(t_map *map, int type);
 
-void				ft_valid_paths(t_map *map);
+/*
+** Output & Bonus
+*/
+void			ft_move_all(t_map *map);
+void			ft_print_solution(t_map *map);
 
-void				ft_delete_path(t_map *map, t_path **to_delete);
-
-void				ft_sort_paths(t_map *map, int type);
-
-void				ft_print_solution(t_map *map, t_room *head);
+void			ft_flag_checker(int ac, char **av, int *flags);
+void			ft_graph(t_map *map);
+void			ft_create_graph(t_map *map, int fd);
+void			ft_paths_info(t_map *map, int choice);
+void			ft_map_info(t_map *map);
 
 #endif

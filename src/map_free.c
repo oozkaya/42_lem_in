@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:48:06 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/30 18:14:36 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/28 11:07:12 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_free_map(t_map *map, t_room *head)
 		ft_memdel((void**)&curr->name);
 		ft_memdel((void**)&curr);
 	}
-//	head = NULL;
 	if (map->links)
 	{
 		i = -1;
@@ -40,7 +39,6 @@ void	ft_free_map(t_map *map, t_room *head)
 		ft_memdel((void**)&cur->tab);
 		ft_memdel((void**)&cur);
 	}
-//	map->path = NULL;
 }
 
 void	ft_free_tab(char **tab)
