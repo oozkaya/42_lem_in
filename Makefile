@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/06/27 19:37:39 by oozkaya          ###   ########.fr        #
+#    Updated: 2018/06/28 20:35:58 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,9 @@ else
 	CFLAGS := $(FLAGS_DEFAULT) $(ADDFLAGS)
 endif
 
+# Variables
+COUNTER=0
+
 # **************************************************************************** #
 # SPECIALS CHARS                                                               #
 # **************************************************************************** #
@@ -111,7 +114,7 @@ all: libft.a $(NAME)
 
 $(NAME): setup_SDL2 $(OBJ_PATH) $(OBJ)
 	@$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
-	@echo -e $(ASSEMBLING)
+	@if [ $(COUNTER) -ne 0 ]; then echo -e $(ASSEMBLING); fi;
 
 libft.a:
 	@make -C $(LIB_PATH)
@@ -141,6 +144,7 @@ $(OBJ_PATH):
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 	@echo -e $(LINKING)
+	@$(eval COUNTER=$(shell echo $$(($(COUNTER)+1))))
 
 clean:
 	@echo -e "$(TITLE)clean $(NAME)$(END_TITLE)"
