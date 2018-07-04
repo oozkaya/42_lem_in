@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 14:46:21 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/24 14:46:31 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/07/04 10:38:07 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	add_buffer(t_buff **buf, char *str, size_t size)
 {
 	size_t	new_size;
 
+	new_size = 0;
 	if (((*buf)->index + size) >= BUFFER_SIZE)
 	{
 		new_size = BUFFER_SIZE;

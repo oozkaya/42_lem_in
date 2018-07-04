@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:48 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 16:16:28 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/07/04 10:40:02 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # define FLAG_L 2
 # define FLAG_R 4
 # define FLAG_G 8
-
+# define FLAG_Q1 16
+# define FLAG_Q2 32
 
 enum { NORMAL, START, END };
 enum { UNLINKED, LINKED, USED };
@@ -120,8 +121,8 @@ void			ft_sort_paths(t_map *map, int type);
 /*
 ** Output & Bonus
 */
-void			ft_move_all(t_map *map);
-void			ft_print_solution(t_map *map);
+void			ft_move_all(t_map *map, int flags);
+void			ft_print_solution(t_map *map, int flags);
 
 void			ft_flag_checker(int ac, char **av, int *flags);
 void			ft_graph(t_map *map);

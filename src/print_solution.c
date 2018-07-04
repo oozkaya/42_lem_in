@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 14:39:58 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 18:54:59 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/29 11:16:03 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_ant_assign(t_map *map, t_path *path, int id)
 	}
 }
 
-static int	ft_ant_departure(t_map *map)
+static int	ft_ant_departure(t_map *map, int flags)
 {
 	int			i;
 	static int	id;
@@ -43,7 +43,8 @@ static int	ft_ant_departure(t_map *map)
 		{
 			while (++i <= map->ants)
 			{
-				ft_printf("L%d-%s\n", i, ft_name(map, tmp->tab[1]));
+				if (!(flags & FLAG_Q2))
+					ft_printf("L%d-%s\n", i, ft_name(map, tmp->tab[1]));
 				map->laps++;
 			}
 			return (1);
@@ -56,7 +57,7 @@ static int	ft_ant_departure(t_map *map)
 	return (0);
 }
 
-static void	ft_print_all(t_map *map)
+static void	ft_print_all(t_map *map, int flags)
 {
 	t_room	*room;
 	int		id;
@@ -67,30 +68,33 @@ static void	ft_print_all(t_map *map)
 		room = map->room;
 		while (room)
 		{
-			if (id == room->ant_id)
+			if (id == room->ant_id && !(flags & FLAG_Q2))
 				ft_printf("L%d-%s ", id, room->name);
 			room = room->next;
 		}
 	}
 	map->laps++;
-	ft_putchar('\n');
+	if (!(flags & FLAG_Q2))
+		ft_putchar('\n');
 }
 
-static void	ft_output(t_map *map)
+static void	ft_output(t_map *map, int flags)
 {
-	ft_putchar('\n');
+	if (!(flags & FLAG_Q2))
+		ft_putchar('\n');
 	while (map->ants_arrived < map->ants)
 	{
-		if (ft_ant_departure(map))
+		if (ft_ant_departure(map, flags))
 			return ;
-		ft_print_all(map);
-		ft_move_all(map);
+		ft_print_all(map, flags);
+		ft_move_all(map, flags);
 	}
 	map->laps++;
-	ft_putchar('\n');
+	if (!(flags & FLAG_Q2))
+		ft_putchar('\n');
 }
 
-void		ft_print_solution(t_map *map)
+void		ft_print_solution(t_map *map, int flags)
 {
 	t_path	*tmp;
 
@@ -101,7 +105,8 @@ void		ft_print_solution(t_map *map)
 		ft_free_map(map, map->room);
 		exit(EXIT_FAILURE);
 	}
-	write(1, map->buf->str, ft_strlen(map->buf->str));
+	if (!(flags & FLAG_Q1))
+		write(1, map->buf->str, ft_strlen(map->buf->str));
 	while (tmp)
 	{
 		if (tmp->tab[1] == -1)
@@ -109,5 +114,5 @@ void		ft_print_solution(t_map *map)
 		else
 			tmp = tmp->next;
 	}
-	ft_output(map);
+	ft_output(map, flags);
 }

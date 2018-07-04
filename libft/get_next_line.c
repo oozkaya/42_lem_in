@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozkaya <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:08:56 by oozkaya           #+#    #+#             */
-/*   Updated: 2017/12/14 13:45:01 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/07/04 10:21:35 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				get_next_line(int const fd, char **line)
 	int				ret;
 	char			*tmp;
 
+	ft_bzero(buf, BUFF_SIZE + 1);
 	if (fd < 0 || !line || read(fd, buf, 0) < 0 || BUFF_SIZE < 0)
 		return (-1);
 	begin = f;

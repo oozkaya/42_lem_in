@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:45:05 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 20:22:53 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/07/04 10:37:41 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_solve_print(t_map *map, int flags)
 		ft_paths_info(map, 2);
 	if (flags & FLAG_R)
 		ft_detailed_room_info(map);
-	ft_print_solution(map);
+	ft_print_solution(map, flags);
 	if (flags & FLAG_L)
 		ft_printf("\n%sTotals laps =%s %d\n", LCYAN, EOC, map->laps);
 	if (flags & FLAG_G)

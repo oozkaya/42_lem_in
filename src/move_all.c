@@ -6,44 +6,32 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 18:08:56 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 11:20:28 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/29 11:11:09 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_room	*ft_get_room(t_map *map, int x, int choice)
+static t_room	*ft_get_room(t_map *map, int index_to_find)
 {
 	t_room	*room;
 
-	if (choice == 1)
+	room = map->room;
+	while (room)
 	{
-		room = map->room;
-		while (room)
-		{
-			if (room->ant_id == x)
-				return (room);
-			room = room->next;
-		}
-	}
-	else
-	{
-		room = map->room;
-		while (room)
-		{
-			if (room->index == x)
-				return (room);
-			room = room->next;
-		}
+		if (room->index == index_to_find)
+			return (room);
+		room = room->next;
 	}
 	return (NULL);
 }
 
-static int		ft_print_end(t_map *map, int index, t_room *room, int id)
+static int		ft_print_end(t_map *map, int index, t_room *room, int flags)
 {
 	if (ft_index_type(map->room, index) == END)
 	{
-		ft_printf("L%d-%s ", id, ft_name(map, index));
+		if (!(flags & FLAG_Q2))
+			ft_printf("L%d-%s ", room->ant_id, ft_name(map, index));
 		room->ant_id = 0;
 		map->ants_arrived++;
 		return (1);
@@ -51,14 +39,12 @@ static int		ft_print_end(t_map *map, int index, t_room *room, int id)
 	return (0);
 }
 
-static t_room	*ft_get_next_room(t_map *map, int id)
+static t_room	*ft_get_next_room(t_map *map, t_room *room, int flags)
 {
 	int		i;
-	t_room	*room;
 	t_path	*path;
 	int		index_to_find;
 
-	room = ft_get_room(map, id, 1);
 	path = map->path;
 	while (path)
 	{
@@ -67,7 +53,7 @@ static t_room	*ft_get_next_room(t_map *map, int id)
 		{
 			if (path->tab[i] == room->index)
 			{
-				if (ft_print_end(map, path->tab[i + 1], room, id))
+				if (ft_print_end(map, path->tab[i + 1], room, flags))
 					return (NULL);
 				index_to_find = path->tab[i + 1];
 				break ;
@@ -75,7 +61,7 @@ static t_room	*ft_get_next_room(t_map *map, int id)
 		}
 		path = path->next;
 	}
-	return (ft_get_room(map, index_to_find, 2));
+	return (ft_get_room(map, index_to_find));
 }
 
 static void		ft_reset_rooms(t_map *map)
@@ -90,7 +76,7 @@ static void		ft_reset_rooms(t_map *map)
 	}
 }
 
-void			ft_move_all(t_map *map)
+void			ft_move_all(t_map *map, int flags)
 {
 	t_room	*room;
 	t_room	*next_room;
@@ -104,7 +90,7 @@ void			ft_move_all(t_map *map)
 		{
 			if (room->ant_id == id && !room->done)
 			{
-				if ((next_room = ft_get_next_room(map, room->ant_id)))
+				if ((next_room = ft_get_next_room(map, room, flags)))
 				{
 					next_room->ant_id = room->ant_id;
 					next_room->done = 1;

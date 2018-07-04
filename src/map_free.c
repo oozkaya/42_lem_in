@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:48:06 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 11:07:12 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/07/04 08:48:20 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_free_tab(char **tab)
 {
 	int		i;
 
-	i = 0;
-	while (tab[i])
-		ft_memdel((void**)&tab[i++]);
+	i = -1;
+	while (tab[++i])
+		ft_memdel((void**)&tab[i]);
 	ft_memdel((void**)&tab);
 }

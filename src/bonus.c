@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:06:23 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/06/28 16:16:40 by oozkaya          ###   ########.fr       */
+/*   Updated: 2018/06/29 10:33:52 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ static void	ft_flag_parse(char *str, int *flags)
 			*flags |= FLAG_R;
 		else if (str[i] == 'g')
 			*flags |= FLAG_G;
+		else if (str[i] == 'q')
+			*flags |= FLAG_Q1;
+		else if (str[i] == 'Q')
+			*flags |= FLAG_Q2;
 		else
 		{
 			ft_usage();
