@@ -62,7 +62,7 @@ Afficher des informations concernant la map:
 
 Exemple :
 
-![alt text](https://bitbucket.org/oozkaya75/lem_in/src/master/flag_i.png)
+![alt text](https://bitbucket.org/oozkaya75/lem_in/raw/cdbbbc64d17a6f251c39b8deca667ef2ef824232/flag_i.png)
 
 ### Graphe visuel en .png
 
@@ -73,7 +73,7 @@ Assez utile pour avoir une vue d'ensemble des maps et se faire une idée des che
 
 Exemple :
 
-![alt text](https://bitbucket.org/oozkaya75/lem_in/src/master/graph.png)
+![alt text](https://bitbucket.org/oozkaya75/lem_in/raw/cdbbbc64d17a6f251c39b8deca667ef2ef824232/graph.png)
 
 
 # Note finale
