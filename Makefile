@@ -6,7 +6,7 @@
 #    By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/26 18:33:52 by oozkaya           #+#    #+#              #
-#    Updated: 2018/06/28 20:35:58 by oozkaya          ###   ########.fr        #
+#    Updated: 2019/03/20 14:26:41 by oozkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,7 @@ INC_PATH = includes/ \
 		   $(LIB_PATH)/includes/ \
 
 # Includes & libraries
-SDL2_CFLAGS = $(shell sdl2-config --cflags)
-SDL2_LIBS = $(shell sdl2-config --libs)
-CPPFLAGS = $(addprefix -I,$(INC_PATH)) $(SDL2_CFLAGS)
+CPPFLAGS = $(addprefix -I,$(INC_PATH))
 LDFLAGS = -L $(LIB_PATH) $(SDL2_LIBS)
 LDLIBS = -lft
 
@@ -73,6 +71,9 @@ else
 	CFLAGS := $(FLAGS_DEFAULT) $(ADDFLAGS)
 endif
 
+# MAKEFLAGS
+MAKEFLAGS += --no-print-directory
+
 # Variables
 COUNTER=0
 
@@ -112,29 +113,29 @@ BIN_DEL = "--$(LOG_CLEAR)$(LOG_YELLOW)Binary$(LOG_NOCOLOR) deletion " \
 
 all: libft.a $(NAME)
 
-$(NAME): setup_SDL2 $(OBJ_PATH) $(OBJ)
+$(NAME): setup_graphviz $(OBJ_PATH) $(OBJ)
 	@$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@if [ $(COUNTER) -ne 0 ]; then echo -e $(ASSEMBLING); fi;
 
 libft.a:
 	@make -C $(LIB_PATH)
 
-setup_SDL2:
-	@if [ $(OS) = Darwin ]; then make SDL2_Darwin; fi;
-	@if [ $(OS) = Linux ]; then make SDL2_Linux; fi;
+setup_graphviz:
+	@if [ $(OS) = Darwin ]; then make graphviz_Darwin; fi;
+	@if [ $(OS) = Linux ]; then make graphviz_Linux; fi;
 
-SDL2_Darwin:
-	@if !(brew ls --versions sdl2 > /dev/null); then \
-		echo -e "$(TITLE)setup sdl2$(END_TITLE)"; \
-		brew update && brew install sdl2; \
+graphviz_Darwin:
+	@if !(brew ls --versions graphviz > /dev/null); then \
+		echo -e "$(TITLE)setup grapĥviz$(END_TITLE)"; \
+		brew update && brew install graphviz; \
 	fi;
 
-SDL2_Linux:
-ifndef $(shell sdl2 --version 2>/dev/null)
-	@echo -e "$(TITLE)setup sdl2$(END_TITLE)"
-	@sudo apt-get update
-	@sudo apt-get install libsdl2-dev
-endif
+graphviz_Linux:
+	@if !(dot -V 2>/dev/null); then \
+		echo -e "$(TITLE)setup graphviz$(END_TITLE)"; \
+		sudo apt-get update -y; \
+		sudo apt-get install -y graphviz; \
+	fi;
 
 $(OBJ_PATH):
 	@echo -e "$(TITLE)build $(NAME)$(END_TITLE)"

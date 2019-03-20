@@ -6,7 +6,7 @@
 /*   By: oozkaya <oozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:50:59 by oozkaya           #+#    #+#             */
-/*   Updated: 2018/05/07 20:37:51 by oozkaya          ###   ########.fr       */
+/*   Updated: 2019/03/20 13:14:18 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
 
