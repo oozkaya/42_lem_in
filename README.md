@@ -57,7 +57,9 @@ Mode standard :
 Afficher des informations concernant la map:
 
 `./lem-in -i < [map]` // affiche la totalité des infos
+
 `./lem-in -l < [map]` // affiche le nombre de tour necessaire pour terminer la map
+
 `./lem-in -r < [map]` // affiche les infos liées aux salles (start et end etant en rouge)
 
 Exemple :
